@@ -9,6 +9,7 @@ public class VirtualKeyboard1 extends JFrame {
 
     private JTextField textField;
     private PedidoAreaSujaGUI pedido;
+    String valor = "";
 
     public VirtualKeyboard1(PedidoAreaSujaGUI pedido) {
         this.pedido = pedido;
@@ -20,21 +21,22 @@ public class VirtualKeyboard1 extends JFrame {
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         // Visor
-        textField = new JTextField();
-        textField.setEditable(false);
-        textField.setPreferredSize(new Dimension(300, 80)); // Tamanho do visor aumentado
-        textField.setFont(new Font("Arial", Font.PLAIN, 42)); // Fonte maior para o visor
-        mainPanel.add(textField, BorderLayout.NORTH);
+//        textField = new JTextField();
+//        textField.setEditable(false);
+//        textField.setPreferredSize(new Dimension(300, 80)); // Tamanho do visor aumentado
+//        textField.setFont(new Font("Arial", Font.PLAIN, 42)); // Fonte maior para o visor
+//        mainPanel.add(textField, BorderLayout.NORTH);
 
         // Painel para os botões
-        JPanel buttonPanel = new JPanel(new GridLayout(4, 3, 5, 5)); // Espaçamento mínimo entre os botões
+        JPanel buttonPanel = new JPanel(new GridLayout(0, 3)); // Espaçamento mínimo entre os botões
 
         // Botões
         String[] buttonLabels = {
                 "1", "2", "3",
                 "4", "5", "6",
                 "7", "8", "9",
-                ",", "0", "Enviar"
+                "/", "0", ",",
+                "", "OK", ""
         };
 
         JButton[] buttons = new JButton[buttonLabels.length];
@@ -44,6 +46,8 @@ public class VirtualKeyboard1 extends JFrame {
             buttons[i].setPreferredSize(new Dimension(80, 80)); // Botões quadrados
             buttonPanel.add(buttons[i]);
         }
+        buttons[14].setVisible(false);
+        buttons[12].setVisible(false);
 
         // Adicionar ação aos botões
         for (JButton button : buttons) {
@@ -51,10 +55,11 @@ public class VirtualKeyboard1 extends JFrame {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     String command = e.getActionCommand();
-                    if (command.equals("Enviar")) {
-                        enviarValor();
+                    if (command.equals("OK")) {
+                        dispose();
                     } else {
-                        textField.setText(textField.getText() + command);
+                        valor = valor + command;
+                        enviarValor();
                     }
                 }
             });
@@ -65,9 +70,9 @@ public class VirtualKeyboard1 extends JFrame {
     }
 
     private void enviarValor() {
-        String valorDigitado = textField.getText();
-        JOptionPane.showMessageDialog(this, "Valor digitado: " + valorDigitado);
-        textField.setText("");
+        String valorDigitado = valor;
+        //JOptionPane.showMessageDialog(this, "Valor digitado: " + valorDigitado);
+        //textField.setText("");
         pedido.definePeso(valorDigitado);
     }
 
