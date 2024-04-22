@@ -4,17 +4,78 @@
  */
 package views;
 
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+
 /**
  *
  * @author Marcio Almeida
  */
 public class InicioAreaSujaGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form InicioAreaSujaGUI
-     */
+    private JPanel panelPedidos;
+    private List<JButton> botoesPedidos;
+    private int contadorPedidos;
+
     public InicioAreaSujaGUI() {
         initComponents();
+
+        // Lista de botões de pedidos
+        botoesPedidos = new ArrayList<>();
+        contadorPedidos = 1;
+
+        //cria o primeiro botão
+        JButton novoPedido = new JButton("Novo Pedido");
+        novoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
+        novoPedido.setVisible(true); // Inicialmente invisível
+        botoesPedidos.add(novoPedido);
+        jPanel1.add(novoPedido);
+
+        novoPedido.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                adicionarNovoPedido();
+            }
+        });
+
+        // Cria os botões iniciais como invisíveis
+        for (int i = 1; i < 8; i++) {
+            JButton botaoPedido = new JButton();
+            botaoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
+            botaoPedido.setVisible(false); // Inicialmente invisível
+            botoesPedidos.add(botaoPedido);
+            botaoPedido.setLayout(new GridLayout(3, 1)); // Define um layout de grade para organizar os rótulos
+            JLabel cliente = new JLabel("Cliente");
+            botaoPedido.add(cliente, BorderLayout.CENTER);
+            JLabel lavagem = new JLabel("Lavagem");
+            botaoPedido.add(lavagem, BorderLayout.CENTER);
+            JLabel secagem = new JLabel("Secagem");
+            botaoPedido.add(secagem, BorderLayout.CENTER);
+            jPanel1.add(botaoPedido);
+        }
+    }
+
+    private void adicionarNovoPedido() {
+        // Verifica se todos os botões de pedidos já foram usados
+        if (contadorPedidos >= botoesPedidos.size()) {
+            System.out.println("Tentando setar o valor");
+            jLabel1.setText("Há mais pedidos na fila de espera");
+            jLabel1.setVisible(true);
+            return;
+        }
+
+        // Torna o próximo botão de pedido visível
+        botoesPedidos.get(contadorPedidos).setVisible(true);
+        contadorPedidos++;
     }
 
     /**
@@ -27,46 +88,46 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(new java.awt.Dimension(940, 660));
-        setPreferredSize(new java.awt.Dimension(940, 660));
         setResizable(false);
         setSize(new java.awt.Dimension(940, 660));
         getContentPane().setLayout(null);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("ÁREA SUJA");
+        jLabel6.setText("SERVIÇOS - ÁREA SUJA");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(jLabel6);
         jLabel6.setBounds(20, 20, 880, 36);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 22)); // NOI18N
-        jButton1.setText("EXECUTAR SERVIÇO");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(510, 210, 240, 200);
-
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setText("NOVO SERVIÇO");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(180, 210, 240, 200);
-
         jButton3.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jButton3.setText("SAIR");
         getContentPane().add(jButton3);
-        jButton3.setBounds(340, 480, 240, 60);
+        jButton3.setBounds(340, 550, 240, 60);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setText("SELECIONE UMA OPÇÃO");
+        jPanel1.setLayout(new java.awt.GridLayout(2, 4, 15, 15));
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(20, 80, 880, 430);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 0, 0));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(310, 80, 390, 70);
+        jLabel1.setBounds(20, 520, 880, 0);
+
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        jLabel5.setText("MAS0481");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(790, 30, 100, 16);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -108,10 +169,10 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }

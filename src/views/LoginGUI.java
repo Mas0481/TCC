@@ -149,7 +149,7 @@ public class LoginGUI extends javax.swing.JFrame {
         char[] senhaDigitada = jSenha.getPassword();
             
             if(jUsuario.getText().equals("teste") && new String(senhaDigitada).equals("1234")) {
-                new PedidoAreaSujaGUI().setVisible(true);
+                new PrincipalGUI().setVisible(true);
             }else{
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.", "Erro",
                         JOptionPane.WARNING_MESSAGE);

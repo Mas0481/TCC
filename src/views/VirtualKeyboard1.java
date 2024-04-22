@@ -4,28 +4,43 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.border.TitledBorder;
 
 public class VirtualKeyboard1 extends JFrame {
 
     private JTextField textField;
     private PedidoAreaSujaGUI pedido;
-    String valor = "";
+    private String valor = "";
 
     public VirtualKeyboard1(PedidoAreaSujaGUI pedido) {
         this.pedido = pedido;
         setTitle("WindCare Keyboard");
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(400, 400);
+        setLocationRelativeTo(this);
+        setUndecorated(true);
+        
+        Point point = new Point(800, 300);
+	setLocation(point);
+        //setAlwaysOnTop(true);
 
         // Painel principal
         JPanel mainPanel = new JPanel(new BorderLayout());
 
         // Visor
-//        textField = new JTextField();
-//        textField.setEditable(false);
-//        textField.setPreferredSize(new Dimension(300, 80)); // Tamanho do visor aumentado
-//        textField.setFont(new Font("Arial", Font.PLAIN, 42)); // Fonte maior para o visor
-//        mainPanel.add(textField, BorderLayout.NORTH);
+        textField = new JTextField();
+        
+        // Criando o título da borda com fonte personalizada
+        TitledBorder titledBorder = BorderFactory.createTitledBorder("Digite o peso total");
+        titledBorder.setTitleFont(new Font("Arial", Font.PLAIN, 18)); // Altere o tamanho da fonte aqui
+
+        // Definindo o título da borda para o textField
+        textField.setBorder(titledBorder);
+
+        textField.setEditable(false);
+        textField.setPreferredSize(new Dimension(300, 80)); // Tamanho do visor aumentado
+        textField.setFont(new Font("Arial", Font.PLAIN, 42)); // Fonte maior para o visor
+        mainPanel.add(textField, BorderLayout.NORTH);
 
         // Painel para os botões
         JPanel buttonPanel = new JPanel(new GridLayout(0, 3)); // Espaçamento mínimo entre os botões
@@ -56,10 +71,12 @@ public class VirtualKeyboard1 extends JFrame {
                 public void actionPerformed(ActionEvent e) {
                     String command = e.getActionCommand();
                     if (command.equals("OK")) {
+                        enviarValor();
                         dispose();
                     } else {
                         valor = valor + command;
-                        enviarValor();
+                        textField.setText(valor);
+                        //enviarValor();
                     }
                 }
             });
