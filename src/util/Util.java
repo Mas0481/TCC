@@ -5,8 +5,11 @@
 package util;
 
 import java.awt.Component;
+import java.awt.Container;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -40,11 +43,29 @@ public class Util {
                 if (componente instanceof JTextField) {
                     JTextField campoTexto = (JTextField) componente;
                     campoTexto.setText("");
-                } else if (componente instanceof JPanel) {
+                } if (componente instanceof JTextArea) {
+                    JTextArea campoTexto = (JTextArea) componente;
+                    campoTexto.setText("");
+                }else if (componente instanceof JPanel) {
                     limparDados((JPanel) componente);
                 }
             }
         }
+        
+        public static void limparCampos(Container container) {
+        Component[] components = container.getComponents();
+        for (Component component : components) {
+            if (component instanceof JTextField) {
+                ((JTextField) component).setText(""); // Limpa campos de texto
+            } else if (component instanceof JComboBox) {
+                ((JComboBox) component).setSelectedIndex(0); // Limpa seleção do ComboBox
+            } else if (component instanceof JTextArea) {
+                ((JTextArea) component).setText(""); // Limpa TextArea
+            } else if (component instanceof Container) {
+                limparCampos((Container) component); // Limpa campos em containers aninhados
+            }
+        }
+    }
 
 	//ativa os campos do frame.
         public static void ativaCampos(JFrame frame) {
@@ -54,7 +75,10 @@ public class Util {
                 if (componente instanceof JTextField) {
                     JTextField campoTexto = (JTextField) componente;
                     campoTexto.setEnabled(true);
-                } else if (componente instanceof JPanel) {
+                } if (componente instanceof JTextArea) {
+                    JTextArea campoTexto = (JTextArea) componente;
+                    campoTexto.setText("");
+                }else if (componente instanceof JPanel) {
                     ativaCampos((JPanel) componente);
                 }           
             }

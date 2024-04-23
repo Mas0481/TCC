@@ -27,7 +27,7 @@ public class PedidoDAO implements OperacoesDAO {
             try {
                 Connection conn = ConexaoMySQL.getConexaoMySQL();
                     PreparedStatement ps;
-                ps = conn.prepareStatement("INSERT INTO pedidos (Qtd_produto, Valor_produtos, fk_codCliente,pagamento, data_pagamento) VALUES (?,?,?,?,?)",
+                ps = conn.prepareStatement("INSERT INTO pedidos (Qtd_produto, Valor_produtos, fk_codCliente, pagamento, data_pagamento, entrega) VALUES (?,?,?,?,?,?)",
                   Statement.RETURN_GENERATED_KEYS);  
                 
                 ps.setFloat(1, p.getQtd_produto());
@@ -35,6 +35,7 @@ public class PedidoDAO implements OperacoesDAO {
                 ps.setInt(3, p.getCodCliente());
                 ps.setInt(4, p.getPagamento());
                 ps.setDate(5, (Date) p.getData_pagamento());
+                ps.setDate(6, (Date) p.getEntrega());
 
                 int rowcount = ps.executeUpdate(); 
                 
@@ -45,7 +46,7 @@ public class PedidoDAO implements OperacoesDAO {
                 ps1.setInt(2, p.getCodCliente());
                 
                 
-                //ps1.executeUpdate(); 
+                ps1.executeUpdate(); 
                 
                 conn.close();
 

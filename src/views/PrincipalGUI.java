@@ -42,8 +42,10 @@ public class PrincipalGUI extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu8 = new javax.swing.JMenu();
+        jMenu6 = new javax.swing.JMenu();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
         jMenu1 = new javax.swing.JMenu();
-        jMenu5 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
         jMenu4 = new javax.swing.JMenu();
         jMenu3 = new javax.swing.JMenu();
@@ -93,22 +95,32 @@ public class PrincipalGUI extends javax.swing.JFrame {
         });
         jMenuBar1.add(jMenu8);
 
+        jMenu6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/table.png"))); // NOI18N
+        jMenu6.setText("Pedidos");
+
+        jMenuItem6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/add.png"))); // NOI18N
+        jMenuItem6.setText("Geral");
+        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem6ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem6);
+
+        jMenuItem7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/add.png"))); // NOI18N
+        jMenuItem7.setText("Área Suja");
+        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem7ActionPerformed(evt);
+            }
+        });
+        jMenu6.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu6);
+
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/table.png"))); // NOI18N
         jMenu1.setText("Pedidos");
-        jMenu1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu1MouseClicked(evt);
-            }
-        });
         jMenuBar1.add(jMenu1);
-
-        jMenu5.setText("Area  Suja");
-        jMenu5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenu5MouseClicked(evt);
-            }
-        });
-        jMenuBar1.add(jMenu5);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/information.png"))); // NOI18N
         jMenu2.setText("Sobre");
@@ -148,11 +160,6 @@ public class PrincipalGUI extends javax.swing.JFrame {
         evt.consume(); 
     }//GEN-LAST:event_jMenu8MouseClicked
 
-    private void jMenu1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu1MouseClicked
-        new PedidosGUI().setVisible(true);  
-        evt.consume(); 
-    }//GEN-LAST:event_jMenu1MouseClicked
-
     private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
         new SobreGUI().setVisible(true);
         evt.consume(); 
@@ -168,9 +175,13 @@ public class PrincipalGUI extends javax.swing.JFrame {
         evt.consume(); 
     }//GEN-LAST:event_jMenu4MouseClicked
 
-    private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked
-    new PedidoAreaSujaGUI().setVisible(true);
-    }//GEN-LAST:event_jMenu5MouseClicked
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        new PedidosGUI().setVisible(true);  
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        new PedidoAreaSujaGUI().setVisible(true);  
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -189,7 +200,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
     private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenu6;
     private javax.swing.JMenu jMenu7;
     private javax.swing.JMenu jMenu8;
     private javax.swing.JMenuBar jMenuBar1;
@@ -199,6 +210,8 @@ public class PrincipalGUI extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
