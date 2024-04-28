@@ -7,6 +7,7 @@ package views;
 import util.Util;
 import modelo.*;
 import DAO.*;
+import config.Configuracao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
@@ -150,6 +151,8 @@ public class LoginGUI extends javax.swing.JFrame {
             
             if(jUsuario.getText().equals("teste") && new String(senhaDigitada).equals("1234")) {
                 new PrincipalGUI().setVisible(true);
+                Configuracao.setUsuario(jUsuario.getText());
+                System.out.println(Configuracao.getUsuario());
             }else{
                 JOptionPane.showMessageDialog(null, "Usuário ou senha incorretos.", "Erro",
                         JOptionPane.WARNING_MESSAGE);

@@ -2,6 +2,7 @@ package views;
 
 import DAO.ClienteDAO;
 import DAO.PedidoDAO;
+import config.Configuracao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -21,6 +22,9 @@ public class PedidosGUI extends javax.swing.JFrame {
     Cliente c;
         
     public PedidosGUI() {
+        
+        //seta o usuario atual
+        usuario.setText(Configuracao.getUsuario());
         
         initComponents();
         
@@ -49,7 +53,6 @@ public class PedidosGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         tfNome = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -67,16 +70,13 @@ public class PedidosGUI extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         btExcluir = new javax.swing.JButton();
+        usuario1 = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        usuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setSize(new java.awt.Dimension(920, 660));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("PEDIDOS");
-        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 740, 50));
 
         jLabel2.setText("*NOME");
         getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 90, 61, 30));
@@ -179,7 +179,23 @@ public class PedidosGUI extends javax.swing.JFrame {
         jPanel1.add(jPanel2);
         jPanel2.setBounds(790, 20, 120, 190);
 
+        usuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario1.setText("MAS0481");
+        jPanel1.add(usuario1);
+        usuario1.setBounds(650, 40, 80, 16);
+
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("PEDIDOS");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(jLabel1);
+        jLabel1.setBounds(20, 20, 740, 50);
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 930, 670));
+
+        usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario.setText("MAS0481");
+        getContentPane().add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 100, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -271,5 +287,7 @@ public class PedidosGUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfEndereco;
     private javax.swing.JTextField tfNome;
+    private javax.swing.JLabel usuario;
+    private javax.swing.JLabel usuario1;
     // End of variables declaration//GEN-END:variables
 }

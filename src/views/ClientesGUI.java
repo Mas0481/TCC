@@ -5,6 +5,7 @@
 package views;
 
 import DAO.ClienteDAO;
+import config.Configuracao;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -30,6 +31,8 @@ public class ClientesGUI extends javax.swing.JFrame {
     private Cliente c;
     
     public ClientesGUI() {
+        
+        usuario.setText(Configuracao.getUsuario());
         
         initComponents();
 
@@ -68,6 +71,8 @@ public class ClientesGUI extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         tbClientes = new javax.swing.JTable();
         btNovoPedido = new javax.swing.JButton();
+        usuario1 = new javax.swing.JLabel();
+        usuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -147,6 +152,9 @@ public class ClientesGUI extends javax.swing.JFrame {
             }
         });
 
+        usuario1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario1.setText("MAS0481");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -165,7 +173,9 @@ public class ClientesGUI extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 890, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(usuario1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 888, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 885, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -175,7 +185,9 @@ public class ClientesGUI extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(90, 90, 90)
+                        .addGap(35, 35, 35)
+                        .addComponent(usuario1)
+                        .addGap(39, 39, 39)
                         .addComponent(btNovoPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(32, 32, 32)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -192,6 +204,10 @@ public class ClientesGUI extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 940, 650));
+
+        usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario.setText("MAS0481");
+        getContentPane().add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 100, -1));
 
         pack();
         setLocationRelativeTo(null);
@@ -284,5 +300,7 @@ public class ClientesGUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfCodigo;
     private javax.swing.JTextField tfEndereco;
     private javax.swing.JTextField tfNome;
+    private javax.swing.JLabel usuario;
+    private javax.swing.JLabel usuario1;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,6 +1,7 @@
 package views;
 
 import DAO.*;
+import config.Configuracao;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,6 +28,8 @@ public class ClienteGUI extends javax.swing.JFrame {
      */
     public ClienteGUI() {
         initComponents();
+        
+        usuario.setText(Configuracao.getUsuario());
         
         // aqui verifica se o ArrayList não esta vazio, caso não esteja já popula a jtable
          ArrayList<Cliente> cad = cliente.list();
@@ -106,6 +109,7 @@ public class ClienteGUI extends javax.swing.JFrame {
         tfCidade = new javax.swing.JTextField();
         jLabel20 = new javax.swing.JLabel();
         jlStatus = new javax.swing.JLabel();
+        usuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cadastro de Clientes");
@@ -117,7 +121,7 @@ public class ClienteGUI extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Cadastro de Clientes");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        cadastroClientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 910, 50));
+        cadastroClientes.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 900, 50));
 
         jLabel2.setText("*NOME");
         cadastroClientes.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 70, 61, 30));
@@ -352,6 +356,10 @@ public class ClienteGUI extends javax.swing.JFrame {
         jlStatus.setText("___________");
         jlStatus.setEnabled(false);
         cadastroClientes.add(jlStatus, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, -1, -1));
+
+        usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario.setText("MAS0481");
+        cadastroClientes.add(usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(800, 30, 100, -1));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -719,5 +727,6 @@ public class ClienteGUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfNumero;
     private javax.swing.JTextField tfObservacao;
     private javax.swing.JTextField tfRg;
+    private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }

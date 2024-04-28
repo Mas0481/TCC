@@ -6,10 +6,8 @@ package views;
 
 import DAO.ClienteDAO;
 import DAO.PedidoDAO;
-import java.time.LocalDate;
-import static java.time.LocalDate.now;
+import config.Configuracao;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import modelo.Cliente;
@@ -33,8 +31,13 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
 
     public PedidoAreaSujaGUI() {
         initComponents();
-
+        
+        //seta o usuario atual
+        usuario.setText(Configuracao.getUsuario());
+        
+        //cria o modelo do combobox e adiciona a primeira linha
         DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+         model.addElement("Selecione o Cliente");
 
         // Adicione os itens do ArrayList ao modelo do ComboBox
         for (Cliente cads : cad) {
@@ -45,6 +48,9 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
         cbCliente.setModel(model);
 
         jData.setDate(data);
+        tfPeso.setText("0");
+        tfValorUnitario.setText("0");
+        jlNumeroPedido.setText(String.valueOf(cad.size()+1));
 
     }
 
@@ -61,9 +67,9 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel6 = new javax.swing.JLabel();
+        usuario = new javax.swing.JLabel();
         jLabel22 = new javax.swing.JLabel();
-        jLabel1 = new javax.swing.JLabel();
+        jlNumeroPedido = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         jLabel25 = new javax.swing.JLabel();
         tfPeso = new javax.swing.JTextField();
@@ -92,32 +98,31 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(940, 660));
-        setResizable(false);
         setSize(new java.awt.Dimension(940, 660));
         getContentPane().setLayout(null);
 
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("INGRESSO DE PEDIDO");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 20, 890, 36);
+        usuario.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
+        usuario.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        usuario.setText("INGRESSO DE PEDIDO");
+        usuario.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(usuario);
+        usuario.setBounds(20, 20, 890, 36);
 
         jLabel22.setText("CLIENTE");
         getContentPane().add(jLabel22);
         jLabel22.setBounds(30, 90, 60, 16);
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("1999");
-        jLabel1.setToolTipText("");
-        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "N Serviço", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
-        jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel1.setMaximumSize(new java.awt.Dimension(58, 34));
-        jLabel1.setMinimumSize(new java.awt.Dimension(58, 34));
-        jLabel1.setPreferredSize(new java.awt.Dimension(58, 34));
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(750, 60, 160, 100);
+        jlNumeroPedido.setFont(new java.awt.Font("Segoe UI", 1, 48)); // NOI18N
+        jlNumeroPedido.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jlNumeroPedido.setText("1999");
+        jlNumeroPedido.setToolTipText("");
+        jlNumeroPedido.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "N Serviço", javax.swing.border.TitledBorder.LEFT, javax.swing.border.TitledBorder.DEFAULT_POSITION));
+        jlNumeroPedido.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        jlNumeroPedido.setMaximumSize(new java.awt.Dimension(58, 34));
+        jlNumeroPedido.setMinimumSize(new java.awt.Dimension(58, 34));
+        jlNumeroPedido.setPreferredSize(new java.awt.Dimension(58, 34));
+        getContentPane().add(jlNumeroPedido);
+        jlNumeroPedido.setBounds(750, 60, 160, 100);
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -298,6 +303,9 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
         Util.EditarFrame.limparCampos(rootPane);
         jData.setDate(data);
         jcDataEntrega.setDate(data);
+        tfPeso.setText("0");
+        tfValorUnitario.setText("0");
+        
     }//GEN-LAST:event_BtLimpaActionPerformed
 
     private void BtConfirmaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtConfirmaActionPerformed
@@ -320,6 +328,7 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
         jcDataEntrega.setDate(data);
         tfPeso.setText("0");
         tfValorUnitario.setText("0");
+        
 
 
     }//GEN-LAST:event_BtConfirmaActionPerformed
@@ -338,8 +347,8 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
 
     private void tfPesoFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_tfPesoFocusGained
         System.out.println("entrou no change properts");
-
-        tfValorTotal.setText("R$ " + String.valueOf(Float.parseFloat(tfValorUnitario.getText()) * Float.parseFloat(tfPeso.getText())));
+        if (!"".equals(tfValorUnitario.getText()))
+            tfValorTotal.setText(String.valueOf(Float.parseFloat(tfValorUnitario.getText()) * Float.parseFloat(tfPeso.getText())));
     }//GEN-LAST:event_tfPesoFocusGained
 
     private void tfPesoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tfPesoMouseClicked
@@ -389,7 +398,6 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton2;
     private javax.swing.JComboBox<String> jComboBox2;
     private com.toedter.calendar.JDateChooser jData;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel24;
@@ -398,7 +406,6 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -407,8 +414,10 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
     private javax.swing.JSpinner jSpinner1;
     private javax.swing.JTextArea jTextArea1;
     private com.toedter.calendar.JCalendar jcDataEntrega;
+    private javax.swing.JLabel jlNumeroPedido;
     private javax.swing.JTextField tfPeso;
     private javax.swing.JTextField tfValorTotal;
     private javax.swing.JTextField tfValorUnitario;
+    private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }

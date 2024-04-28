@@ -6,6 +6,7 @@ package views;
 
 import DAO.ClienteDAO;
 import DAO.PedidoDAO;
+import config.Configuracao;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.time.LocalDate;
@@ -34,6 +35,9 @@ public class PedidoGUI extends javax.swing.JFrame {
 
      public PedidoGUI(Cliente c) {
         this.c = c;
+        
+        //seta o usuario atual
+        usuario.setText(Configuracao.getUsuario());
          
         initComponents();
          tfPago.setVisible(false);
@@ -100,6 +104,7 @@ public class PedidoGUI extends javax.swing.JFrame {
         btPago = new javax.swing.JRadioButton();
         btAPagar = new javax.swing.JRadioButton();
         tfPago = new javax.swing.JTextField();
+        usuario = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pedido");
@@ -335,6 +340,11 @@ public class PedidoGUI extends javax.swing.JFrame {
         getContentPane().add(tfPago);
         tfPago.setBounds(810, 550, 100, 22);
 
+        usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/img/icons/user.png"))); // NOI18N
+        usuario.setText("MAS0481");
+        getContentPane().add(usuario);
+        usuario.setBounds(790, 30, 100, 16);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -506,5 +516,6 @@ public class PedidoGUI extends javax.swing.JFrame {
     private javax.swing.JTextField tfTelefone;
     private javax.swing.JTextField tfTotal;
     private javax.swing.JLabel tfTotalG;
+    private javax.swing.JLabel usuario;
     // End of variables declaration//GEN-END:variables
 }
