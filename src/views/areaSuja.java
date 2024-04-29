@@ -26,65 +26,51 @@ public class areaSuja extends javax.swing.JFrame {
     //instancia e objeto pedidoDAO  e recupera a lista de pedidos
     PedidoDAO pedidos = new PedidoDAO();
     ArrayList<Pedido> cad_pedidos = pedidos.list();
-    
-    
 
     public areaSuja() {
         initComponents();
         btPedido1.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
         btPedido1.setText("NOVO PEDIDO");
-        btPedido1.setVisible(true); // Inicialmente invisível                       
+        btPedido1.setVisible(true); // Inicialmente invisível  
 
         Thread threadPedidos = new Thread(new Runnable() {
             @Override
             public void run() {
-                
+
                 // Array de botões
                 JButton[] botoes = {btPedido1, btPedido2, btPedido3, btPedido4, btPedido5, btPedido6, btPedido7, btPedido8};
-                
+
                 while (true) {
-                    System.out.println("tradeando");
-                    
-                    //cad_pedidos.clear();
-                    //jPanel1.repaint();
-                    
-                     ArrayList<Pedido> cad_pedidos = pedidos.list();
-                     
-                     System.out.println(cad_pedidos);
-                    
-                     
-                    //for (JButton botao : botoes) {
-                        
-                        for (int i = 0; i < botoes.length - 1; i++) {
-                            // Verificar se o índice é válido na lista de valores
-                            
-                             botoes[i + 1].removeAll();
-                             
-                            if (i < cad_pedidos.size()) {
-                                                      
+
+                    ArrayList<Pedido> cad_pedidos = pedidos.list();
+
+                    // Verificar se o índice é válido na lista de valores
+                    for (int i = 0; i < botoes.length - 1; i++) {
+
+                        botoes[i + 1].removeAll();
+
+                        jPanel1.setDoubleBuffered(true);
+
+                        if (i < cad_pedidos.size()) {
+
                             botoes[i + 1].setLayout(new FlowLayout(FlowLayout.CENTER)); // Define um layout de grade para organizar os rótulos
 
                             JLabel pedido = new JLabel("");
                             botoes[i + 1].add(pedido, BorderLayout.CENTER);
                             pedido.setText("Número do Pedido: " + cad_pedidos.get(i).getCodPedido());
                             System.out.println("Número do Pedido: " + cad_pedidos.get(i).getCodPedido());
-                            pedido.repaint();         
-                            
+
                             JLabel cliente = new JLabel("");
                             botoes[i + 1].add(cliente, BorderLayout.CENTER);
                             cliente.setText("Codigo do Cliente: " + cad_pedidos.get(i).getCodCliente());
-                            cliente.repaint();
 
                             JLabel entrega = new JLabel("Data da Entrega: " + cad_pedidos.get(i).getEntrega());
                             botoes[i + 1].add(entrega, BorderLayout.CENTER);
                             entrega.setText("Data da Entrega: " + cad_pedidos.get(i).getEntrega());
-                            entrega.repaint();
 
                             JLabel quantidade = new JLabel();
                             botoes[i + 1].add(quantidade, BorderLayout.CENTER);
                             quantidade.setText("Quantidade do Pedido: " + cad_pedidos.get(i).getQtd_produto());
-                            quantidade.repaint();
-                            botoes[i + 1].repaint();
 
                             JButton botaoLavagem = new JButton();
                             JLabel rotulo_lavagem = new JLabel("Lavagem");
@@ -118,20 +104,14 @@ public class areaSuja extends javax.swing.JFrame {
                             botoes[i + 1].add(botaoDobra_Embala, BorderLayout.CENTER);
 
                             jPanel1.getComponent(i + 1).setVisible(true);
-                            botoes[i + 1].repaint();
-                            
-                            
 
-                            } else {
-                                // Se não houver valor correspondente na lista, limpar o texto do botão
-                                botoes[i + 1].setText("");
-                                jPanel1.getComponent(i + 1).setVisible(false);
-                            }
-                            
+                        } else {
+                            // Se não houver valor correspondente na lista, limpar o texto do botão
+                            botoes[i + 1].setText("");
+                            jPanel1.getComponent(i + 1).setVisible(false);
                         }
+                    }
 
-                    //}
-                    
                     try {
                         Thread.sleep(Configuracao.getAtualizacao());
                     } catch (InterruptedException ex) {
