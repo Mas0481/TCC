@@ -53,7 +53,141 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
         PedidoDAO pedidos = new PedidoDAO();
         ArrayList<Pedido> cad_pedidos = pedidos.list();
 
-        //cria o primeiro botão
+//        //cria o primeiro botão
+//        JButton novoPedido = new JButton("Novo Pedido");
+//        novoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
+//        novoPedido.setVisible(true); // Inicialmente invisível
+//        botoesPedidos.add(novoPedido);
+//        jPanel1.add(novoPedido);
+        
+        
+        
+        
+
+//        novoPedido.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//                new PedidoAreaSujaGUI().setVisible(true); 
+//            }
+//        });
+
+//        // Cria os botões iniciais como invisíveis
+//        for (int i = 1; i < 8; i++) {
+//            JButton botaoPedido = new JButton();
+//            botaoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
+//            botaoPedido.setVisible(true); // Inicialmente invisível
+//            botoesPedidos.add(botaoPedido);
+//            botaoPedido.setLayout(new FlowLayout(FlowLayout.CENTER)); // Define um layout de grade para organizar os rótulos
+//            
+//            JLabel pedido = new JLabel("Pedido");
+//            botaoPedido.add(pedido, BorderLayout.CENTER);
+//            
+//            JLabel cliente = new JLabel("Cliente");
+//            botaoPedido.add(cliente, BorderLayout.CENTER);
+//            
+//            JLabel entrega = new JLabel("Entrega");
+//            botaoPedido.add(entrega, BorderLayout.CENTER);
+//            
+//            JLabel quantidade = new JLabel("Quantidade");
+//            botaoPedido.add(quantidade, BorderLayout.CENTER);
+//            
+//            JButton botaoLavagem = new JButton();  
+//            JLabel rotulo_lavagem = new JLabel("Lavagem");
+//            botaoLavagem.add(rotulo_lavagem, BorderLayout.CENTER);
+//            JProgressBar lavagem = new JProgressBar();
+//            botaoLavagem.add(lavagem, BorderLayout.CENTER);
+//            botaoPedido.add(botaoLavagem, BorderLayout.CENTER);
+//            lavagem.setForeground(new java.awt.Color(255, 0, 0));
+//    
+//            JButton botaoCentrifugacao = new JButton();
+//            JLabel rotulo_centrifugacao = new JLabel("Centrifugação");
+//            botaoCentrifugacao.add(rotulo_centrifugacao, BorderLayout.CENTER);
+//            JProgressBar centrifugacao = new JProgressBar();
+//            botaoCentrifugacao.add(centrifugacao, BorderLayout.CENTER);
+//            botaoPedido.add(botaoCentrifugacao, BorderLayout.CENTER);            
+//            
+//            JButton botaoSecagem = new JButton();
+//            JLabel rotulo_secagem = new JLabel("Secagem");
+//            botaoSecagem.add(rotulo_secagem, BorderLayout.CENTER);
+//            JProgressBar secagem = new JProgressBar();
+//            secagem.setValue(i*23/2);
+//            botaoSecagem.add(secagem, BorderLayout.CENTER);
+//            botaoPedido.add(botaoSecagem, BorderLayout.CENTER);            
+//            
+//            JButton botaoDobra_Embala = new JButton();
+//            JLabel rotulo_botaoDobra_Embala = new JLabel("Finalização");
+//            botaoDobra_Embala.add(rotulo_botaoDobra_Embala, BorderLayout.CENTER);
+//            JProgressBar dobra_Embala = new JProgressBar();
+//            dobra_Embala.setValue(i*23/2);
+//            botaoDobra_Embala.add(dobra_Embala, BorderLayout.CENTER);
+//            botaoPedido.add(botaoDobra_Embala, BorderLayout.CENTER);      
+//           
+//            jPanel1.add(botaoPedido);
+//            
+//            if(cad_pedidos.size() > i-1){
+//                pedido.setText("Numero do pedido: " + cad_pedidos.get(i-1).getCodPedido());
+//                cliente.setText("Numero do pedido: " + cad_pedidos.get(i-1).getCodCliente());
+//                quantidade.setText("Quantidade: " + String.valueOf(cad_pedidos.get(i-1).getQtd_produto()));
+//                entrega.setText("Data Entrega: " + String.valueOf(cad_pedidos.get(i-1).getEntrega()));
+//                botaoPedido.setVisible(true);
+       //     }
+       //}
+       threadPedidos.start();
+        //adicionarPedidoNoBotao();
+    }
+
+    private void adicionarPedidoNoBotao() {
+
+        //cria o modelo do combobox e adiciona a primeira linha
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addElement("Selecione o Cliente");
+
+        // Adicione os itens do ArrayList ao modelo do ComboBox
+        for (Pedido cads : cad_pedidos) {
+            botoesPedidos.get(contadorPedidos + 1).setText("");
+        }
+
+        
+        // Verifica se todos os botões de pedidos já foram usados
+        if (contadorPedidos >= botoesPedidos.size()) {
+            System.out.println("Tentando setar o valor");
+            jLabel1.setText("Há mais pedidos na fila de espera");
+            jLabel1.setVisible(true);
+            return;
+        }
+
+        // Torna o próximo botão de pedido visível
+        botoesPedidos.get(contadorPedidos).setVisible(true);
+        contadorPedidos++;
+    }
+
+    private void adicionarNovoPedido() {
+        // Verifica se todos os botões de pedidos já foram usados
+        if (contadorPedidos >= botoesPedidos.size()) {
+            System.out.println("Tentando setar o valor");
+            jLabel1.setText("Há mais pedidos na fila de espera");
+            jLabel1.setVisible(true);
+            return;
+        }
+
+        // Torna o próximo botão de pedido visível
+        botoesPedidos.get(contadorPedidos).setVisible(true);
+        contadorPedidos++;
+    }
+    
+    Thread threadPedidos = new Thread(new Runnable() {
+        @Override
+        public void run() {
+
+        
+         while(true){
+         jPanel1.removeAll();
+         jPanel1.revalidate();
+         jPanel1.repaint();
+             
+             
+        ArrayList<Pedido> cad_pedidos = pedidos.list();
+
         JButton novoPedido = new JButton("Novo Pedido");
         novoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
         novoPedido.setVisible(true); // Inicialmente invisível
@@ -61,20 +195,12 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
         jPanel1.add(novoPedido);
         
         
-
-        novoPedido.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new PedidoAreaSujaGUI().setVisible(true); 
-            }
-        });
-
-        // Cria os botões iniciais como invisíveis
-        for (int i = 1; i < 8; i++) {
+                try {
+                    for (int i = 1; i < 8; i++) {
             JButton botaoPedido = new JButton();
             botaoPedido.setFont(new Font("Arial", Font.BOLD, 24)); // Define a fonte e o tamanho do texto
-            botaoPedido.setVisible(false); // Inicialmente invisível
-            botoesPedidos.add(botaoPedido);
+            botaoPedido.setVisible(true); // Inicialmente invisível
+            
             botaoPedido.setLayout(new FlowLayout(FlowLayout.CENTER)); // Define um layout de grade para organizar os rótulos
             
             JLabel pedido = new JLabel("Pedido");
@@ -120,6 +246,7 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
             botaoDobra_Embala.add(dobra_Embala, BorderLayout.CENTER);
             botaoPedido.add(botaoDobra_Embala, BorderLayout.CENTER);      
            
+            botoesPedidos.add(botaoPedido);
             jPanel1.add(botaoPedido);
             
             if(cad_pedidos.size() > i-1){
@@ -129,50 +256,17 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
                 entrega.setText("Data Entrega: " + String.valueOf(cad_pedidos.get(i-1).getEntrega()));
                 botaoPedido.setVisible(true);
             }
-        }
+                    }
+  
+                    Thread.sleep(3000); // Espera 3 segundos para simular a chegada de um novo pedido
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }}
         
-        //adicionarPedidoNoBotao();
-    }
-
-    private void adicionarPedidoNoBotao() {
-
-        //cria o modelo do combobox e adiciona a primeira linha
-        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
-        model.addElement("Selecione o Cliente");
-
-        // Adicione os itens do ArrayList ao modelo do ComboBox
-        for (Pedido cads : cad_pedidos) {
-            botoesPedidos.get(contadorPedidos + 1).setText("");
-        }
-
-        
-        // Verifica se todos os botões de pedidos já foram usados
-        if (contadorPedidos >= botoesPedidos.size()) {
-            System.out.println("Tentando setar o valor");
-            jLabel1.setText("Há mais pedidos na fila de espera");
-            jLabel1.setVisible(true);
-            return;
-        }
-
-        // Torna o próximo botão de pedido visível
-        botoesPedidos.get(contadorPedidos).setVisible(true);
-        contadorPedidos++;
-    }
-
-    private void adicionarNovoPedido() {
-        // Verifica se todos os botões de pedidos já foram usados
-        if (contadorPedidos >= botoesPedidos.size()) {
-            System.out.println("Tentando setar o valor");
-            jLabel1.setText("Há mais pedidos na fila de espera");
-            jLabel1.setVisible(true);
-            return;
-        }
-
-        // Torna o próximo botão de pedido visível
-        botoesPedidos.get(contadorPedidos).setVisible(true);
-        contadorPedidos++;
-    }
-    
+    });
+       //threadPedidos.start();
     
 
     /**
