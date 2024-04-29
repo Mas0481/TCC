@@ -5,6 +5,7 @@
 package views;
 
 import DAO.PedidoDAO;
+import config.Configuracao;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.Font;
@@ -43,15 +44,22 @@ public class areaSuja extends javax.swing.JFrame {
                 
                 while (true) {
                     System.out.println("tradeando");
+                    
+                    //cad_pedidos.clear();
+                    //jPanel1.repaint();
+                    
                      ArrayList<Pedido> cad_pedidos = pedidos.list();
                      
                      System.out.println(cad_pedidos);
-
-                     jPanel1.repaint();
+                    
                      
-                    for (JButton botao : botoes) {
+                    //for (JButton botao : botoes) {
+                        
                         for (int i = 0; i < botoes.length - 1; i++) {
                             // Verificar se o índice é válido na lista de valores
+                            
+                             botoes[i + 1].removeAll();
+                             
                             if (i < cad_pedidos.size()) {
                                                       
                             botoes[i + 1].setLayout(new FlowLayout(FlowLayout.CENTER)); // Define um layout de grade para organizar os rótulos
@@ -111,6 +119,8 @@ public class areaSuja extends javax.swing.JFrame {
 
                             jPanel1.getComponent(i + 1).setVisible(true);
                             botoes[i + 1].repaint();
+                            
+                            
 
                             } else {
                                 // Se não houver valor correspondente na lista, limpar o texto do botão
@@ -120,10 +130,10 @@ public class areaSuja extends javax.swing.JFrame {
                             
                         }
 
-                    }
+                    //}
                     
                     try {
-                        Thread.sleep(3000);
+                        Thread.sleep(Configuracao.getAtualizacao());
                     } catch (InterruptedException ex) {
                         Logger.getLogger(areaSuja.class.getName()).log(Level.SEVERE, null, ex);
                     }
@@ -204,6 +214,7 @@ public class areaSuja extends javax.swing.JFrame {
         jButton9.setBounds(320, 620, 210, 60);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPedido1ActionPerformed
