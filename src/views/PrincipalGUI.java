@@ -216,7 +216,7 @@ public class PrincipalGUI extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
     private void jMenuItem8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem8ActionPerformed
-        new areaSuja().setVisible(true); 
+        new InicioAreaSujaGUI().setVisible(true); 
     }//GEN-LAST:event_jMenuItem8ActionPerformed
 
     private void jMenu5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu5MouseClicked

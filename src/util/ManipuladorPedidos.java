@@ -7,13 +7,13 @@ import java.util.Date;
 import java.util.Random;
 import modelo.Pedido;
 
-public class GerarPedidos {
+public class ManipuladorPedidos {
 
     public boolean GerarPedidos() {
         // Lista para armazenar os pedidos gerados
         PedidoDAO p = new PedidoDAO();
         int quant = Configuracao.getQtd_pedidos_gerados();
-        
+
         System.out.println("Entrou no gerador de pedidos, serão gerados " + quant + " pedidos.");
 
         // Gerar pedidos automaticamente
@@ -38,7 +38,7 @@ public class GerarPedidos {
             pedido.setQtd_produto(quantidade);
             pedido.setValor_produtos(valor);
             pedido.setEntrega(dataEntrega);
-           
+
             p.inserir(pedido);
         }
         return true;
@@ -54,5 +54,14 @@ public class GerarPedidos {
     // gerador de quantidade
     private static int gerarQuantidade() {
         return (int) (Math.random() * 11);
+    }
+
+    public boolean ApagarPedido(int num_pedido) {
+        // Lista para armazenar os pedidos gerados
+        PedidoDAO p = new PedidoDAO();
+  
+            p.excluir(num_pedido);
+        
+        return true;
     }
 }

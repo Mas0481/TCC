@@ -4,8 +4,13 @@
  */
 package views;
 
+import DAO.PedidoDAO;
 import config.Configuracao;
-import util.GerarPedidos;
+import java.util.ArrayList;
+import javax.swing.DefaultComboBoxModel;
+import modelo.Cliente;
+import modelo.Pedido;
+import util.ManipuladorPedidos;
 
 /**
  *
@@ -13,13 +18,26 @@ import util.GerarPedidos;
  */
 public class ConfiguracoesGUI extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Configuracoes
-     */
+    PedidoDAO p = new PedidoDAO();
+    ArrayList<Pedido> cad_pedidos = p.list();
+
     public ConfiguracoesGUI() {
         initComponents();
-
+        //seta o usuario atual
         usuario.setText(Configuracao.getUsuario());
+
+        ArrayList<Pedido> cad_pedidos = p.list();
+        //cria o modelo do combobox e adiciona a primeira linha
+        DefaultComboBoxModel<String> model = new DefaultComboBoxModel<>();
+        model.addElement("");
+
+        // Adicione os itens do ArrayList ao modelo do ComboBox
+        for (Pedido cads : cad_pedidos) {
+            model.addElement("" + cads.getCodPedido());
+        }
+
+        // Defina o modelo atualizado no ComboBox
+        cbQtdExcluir.setModel(model);
     }
 
     /**
@@ -43,8 +61,12 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         jTextField2 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jButton5 = new javax.swing.JButton();
+        jButton6 = new javax.swing.JButton();
+        cbQtdExcluir = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setPreferredSize(new java.awt.Dimension(560, 420));
         setSize(new java.awt.Dimension(560, 420));
         getContentPane().setLayout(null);
@@ -114,6 +136,27 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         getContentPane().add(jButton4);
         jButton4.setBounds(110, 310, 317, 35);
 
+        jLabel4.setText("Excluir Pedidos");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(30, 260, 170, 16);
+
+        jButton5.setText("OK");
+        jButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton5ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton5);
+        jButton5.setBounds(310, 260, 50, 23);
+
+        jButton6.setText("Todos");
+        getContentPane().add(jButton6);
+        jButton6.setBounds(370, 260, 72, 23);
+
+        cbQtdExcluir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(cbQtdExcluir);
+        cbQtdExcluir.setBounds(230, 260, 72, 22);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -136,13 +179,49 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         }
 
         Configuracao.setQtd_pedidos_gerados(valor);
-        GerarPedidos gerar = new GerarPedidos();
+        ManipuladorPedidos gerar = new ManipuladorPedidos();
         gerar.GerarPedidos();// TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         dispose();
     }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        Object selectedItem = cbQtdExcluir.getSelectedItem();
+        int valor = 0;
+        if (selectedItem != null) {
+            String selectedString = selectedItem.toString();
+            try {
+                // Tente converter a String para um int
+                valor = Integer.parseInt(selectedString);
+            } catch (NumberFormatException e) {
+                System.out.println("Erro ao converter para int: " + e.getMessage());
+            }
+        }
+
+        p.excluir(valor);
+        
+  cbQtdExcluir.removeAllItems();
+  
+        ArrayList<Pedido> cad_pedidos1 = p.list();
+         //cria o modelo do combobox e adiciona a primeira linha
+        DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
+        model1.addElement("");
+
+        // Adicione os itens do ArrayList ao modelo do ComboBox
+        for (Pedido cads : cad_pedidos1) {
+            model1.addElement("" + cads.getCodPedido());
+        }
+        
+             // Defina o modelo atualizado no ComboBox
+        cbQtdExcluir.setModel(model1);
+        cbQtdExcluir.repaint();
+        
+       
+        
+
+    }//GEN-LAST:event_jButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,14 +260,18 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbQtdExcluir;
     private javax.swing.JComboBox<String> cbQtdPedidos;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField tfTempo;
