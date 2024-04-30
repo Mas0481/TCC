@@ -63,7 +63,6 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
         jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
         cbQtdExcluir = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -148,10 +147,6 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         });
         getContentPane().add(jButton5);
         jButton5.setBounds(310, 260, 50, 23);
-
-        jButton6.setText("Todos");
-        getContentPane().add(jButton6);
-        jButton6.setBounds(370, 260, 72, 23);
 
         cbQtdExcluir.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         getContentPane().add(cbQtdExcluir);
@@ -267,7 +262,6 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
