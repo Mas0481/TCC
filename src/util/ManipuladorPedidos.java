@@ -1,5 +1,6 @@
 package util;
 
+import DAO.ClienteDAO;
 import DAO.PedidoDAO;
 import config.Configuracao;
 import java.time.LocalDate;
@@ -64,4 +65,5 @@ public class ManipuladorPedidos {
         
         return true;
     }
+    
 }

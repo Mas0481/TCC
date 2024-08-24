@@ -74,7 +74,7 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
         getContentPane().add(jLabel1);
         jLabel1.setBounds(30, 135, 182, 16);
 
-        jLabel2.setText("Gerar pedidos automaticamente");
+        jLabel2.setText("Gerar Pedidos Automaticamente");
         getContentPane().add(jLabel2);
         jLabel2.setBounds(30, 178, 176, 16);
 
@@ -197,25 +197,6 @@ public class ConfiguracoesGUI extends javax.swing.JFrame {
 
         p.excluir(valor);
         
-  cbQtdExcluir.removeAllItems();
-  
-        ArrayList<Pedido> cad_pedidos1 = p.list();
-         //cria o modelo do combobox e adiciona a primeira linha
-        DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
-        model1.addElement("");
-
-        // Adicione os itens do ArrayList ao modelo do ComboBox
-        for (Pedido cads : cad_pedidos1) {
-            model1.addElement("" + cads.getCodPedido());
-        }
-        
-             // Defina o modelo atualizado no ComboBox
-        cbQtdExcluir.setModel(model1);
-        cbQtdExcluir.repaint();
-        
-       
-        
-
     }//GEN-LAST:event_jButton5ActionPerformed
 
     /**

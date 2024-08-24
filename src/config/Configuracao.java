@@ -5,6 +5,15 @@ public class Configuracao {
     private static String usuario;
     private static int atualizacao = 3000;
     private static int qtd_pedidos_gerados;
+    private static int qtd_clientes_gerados;
+
+    public static int getQtd_clientes_gerados() {
+        return qtd_clientes_gerados;
+    }
+
+    public static void setQtd_clientes_gerados(int qtd_clientes_gerados) {
+        Configuracao.qtd_clientes_gerados = qtd_clientes_gerados;
+    }
 
     public static String getUsuario() {
         return usuario;
