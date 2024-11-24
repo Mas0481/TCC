@@ -27,15 +27,23 @@ public class PedidoDAO implements OperacoesDAO {
                 try {
                     Connection conn = ConexaoMySQL.getConexaoMySQL();
                     PreparedStatement ps;
-                    ps = conn.prepareStatement("INSERT INTO pedidos (Qtd_produto, Valor_produtos, fk_codCliente, pagamento, data_pagamento, entrega) VALUES (?,?,?,?,?,?)",
+                    ps = conn.prepareStatement("INSERT INTO pedidos (Qtd_produto, Valor_produtos, fk_codCliente, pagamento, dataColeta, dataEntrega, recebimentoStatus, classificacaoStatus, lavagemStatus, centrifugacaoStatus, secagemStatus, passadoriaStatus, finalizacaoStatus, retornoStatus) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)",
                             Statement.RETURN_GENERATED_KEYS);
 
-                    ps.setFloat(1, p.getQtd_produto());
-                    ps.setFloat(2, p.getValor_produtos());
+                    ps.setDouble(1, p.getQtd_produto());
+                    ps.setDouble(2, p.getValor_produtos());
                     ps.setInt(3, p.getCodCliente());
                     ps.setInt(4, p.getPagamento());
-                    ps.setDate(5, (Date) p.getData_pagamento());
-                    ps.setDate(6, (Date) p.getEntrega());
+                    ps.setDate(5, new Date(p.getDataColeta().getTime()));  
+                    ps.setDate(6, new Date(p.getDataEntrega().getTime()));
+                    ps.setInt(7, 0);
+                    ps.setInt(8, 0);
+                    ps.setInt(9, 0);
+                    ps.setInt(10, 0);
+                    ps.setInt(11, 0);
+                    ps.setInt(12, 0);
+                    ps.setInt(13, 0);
+                    ps.setInt(14, 0);
 
                     int rowcount = ps.executeUpdate();
 
@@ -111,7 +119,7 @@ public class PedidoDAO implements OperacoesDAO {
                     c.setCodPedido(rs.getInt(1));
                     c.setQtd_produto(rs.getFloat(2));
                     c.setValor_produtos(rs.getInt(3));
-                    c.setEntrega(rs.getDate(4));
+                    c.setDataEntrega(rs.getDate(4));
                     c.setPagamento(rs.getInt(5));
                     c.setData_pagamento(rs.getDate(6));
 
@@ -143,9 +151,9 @@ public class PedidoDAO implements OperacoesDAO {
                     PreparedStatement ps = conn.prepareStatement("UPDATE pedidos SET Qtd_produto=?, Valor_produtos=?, Pagamento=?, Data_pagamento=? WHERE codPedido=?");
 
                     ps.setInt(1, p.getCodPedido());
-                    ps.setFloat(2, p.getQtd_produto());
-                    ps.setFloat(3, p.getValor_produtos());
-                    ps.setDate(4, (Date) p.getEntrega());
+                    ps.setDouble(2, p.getQtd_produto());
+                    ps.setDouble(3, p.getValor_produtos());
+                    ps.setDate(4, (Date) p.getDataEntrega());
                     ps.setInt(5, p.getPagamento());
                     ps.setDate(6, (Date) p.getData_pagamento());
 
@@ -169,7 +177,7 @@ public class PedidoDAO implements OperacoesDAO {
         ArrayList<Pedido> minhaLista = new ArrayList<Pedido>();
         try {
             Connection conn = ConexaoMySQL.getConexaoMySQL();
-            PreparedStatement ps = conn.prepareStatement("SELECT p.codPedido,p.fk_codCliente,p.qtd_produto,p.valor_produtos,p.entrega, p.pagamento, p.data_pagamento from pedidos as p inner join clientes as c ON p.fk_codCliente=c.codCliente inner join pessoas as s on c.fk_Cpf=s.cpf;");
+            PreparedStatement ps = conn.prepareStatement("SELECT p.codPedido,p.fk_codCliente,p.qtd_produto,p.valor_produtos,p.dataEntrega, p.pagamento, p.data_pagamento from pedidos as p inner join clientes as c ON p.fk_codCliente=c.codCliente inner join pessoas as s on c.fk_Cpf=s.cpf;");
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
@@ -179,7 +187,7 @@ public class PedidoDAO implements OperacoesDAO {
                 c.setCodCliente(rs.getInt(2));
                 c.setQtd_produto(rs.getFloat(3));
                 c.setValor_produtos(rs.getInt(4));
-                c.setEntrega(rs.getDate(5));
+                c.setDataEntrega(rs.getDate(5));
                 c.setPagamento(rs.getInt(6));
                 c.setData_pagamento(rs.getDate(7));
                 minhaLista.add(c);

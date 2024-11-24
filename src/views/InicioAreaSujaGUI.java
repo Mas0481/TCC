@@ -64,9 +64,9 @@ public class InicioAreaSujaGUI extends javax.swing.JFrame {
                             botoes[i + 1].add(cliente, BorderLayout.CENTER);
                             cliente.setText("Codigo do Cliente: " + cad_pedidos.get(i).getCodCliente());
 
-                            JLabel entrega = new JLabel("Data da Entrega: " + cad_pedidos.get(i).getEntrega());
+                            JLabel entrega = new JLabel("Data da Entrega: " + cad_pedidos.get(i).getDataEntrega());
                             botoes[i + 1].add(entrega, BorderLayout.CENTER);
-                            entrega.setText("Data da Entrega: " + cad_pedidos.get(i).getEntrega());
+                            entrega.setText("Data da Entrega: " + cad_pedidos.get(i).getDataEntrega());
 
                             JLabel quantidade = new JLabel();
                             botoes[i + 1].add(quantidade, BorderLayout.CENTER);

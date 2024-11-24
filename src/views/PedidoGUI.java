@@ -9,9 +9,15 @@ import DAO.PedidoDAO;
 import config.Configuracao;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
+import static java.time.LocalDate.now;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
@@ -24,8 +30,8 @@ public class PedidoGUI extends javax.swing.JFrame {
     private final Cliente c;
     
         ArrayList<Pedido> lista = new ArrayList();
-        float valor;
-        float qtd;
+        double valor;
+        double qtd;
         long codCli;
         Date data;
                 
@@ -37,7 +43,7 @@ public class PedidoGUI extends javax.swing.JFrame {
         this.c = c;
         
         //seta o usuario atual
-        usuario.setText(Configuracao.getUsuario());
+//        usuario.setText(Configuracao.getUsuario());
          
         initComponents();
          tfPago.setVisible(false);
@@ -50,7 +56,14 @@ public class PedidoGUI extends javax.swing.JFrame {
          tbProdutos.setValueAt("Basico", 0, 1);
          tbProdutos.setValueAt(10.00, 0, 2);
          tbProdutos.setValueAt("un", 0, 3);
-         codCli = c.getCodCliente();
+         
+         
+              // Captura e formata a data atual
+        LocalDate dataAtual = LocalDate.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        tfDataColeta.setText(dataAtual.format(formatter));
+        tfDataEntrega.setText(LocalDate.now().plusDays(2).format(formatter));
+         
          
     }
 
@@ -78,22 +91,6 @@ public class PedidoGUI extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         tfTotalG = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel24 = new javax.swing.JLabel();
-        jLabel25 = new javax.swing.JLabel();
-        jLabel26 = new javax.swing.JLabel();
-        jLabel27 = new javax.swing.JLabel();
-        jLabel28 = new javax.swing.JLabel();
-        jLabel29 = new javax.swing.JLabel();
-        jLabel30 = new javax.swing.JLabel();
-        jLabel31 = new javax.swing.JLabel();
-        jLabel32 = new javax.swing.JLabel();
-        jLabel33 = new javax.swing.JLabel();
-        jLabel34 = new javax.swing.JLabel();
-        jLabel35 = new javax.swing.JLabel();
-        jLabel40 = new javax.swing.JLabel();
-        jLabel41 = new javax.swing.JLabel();
-        jLabel42 = new javax.swing.JLabel();
-        jLabel43 = new javax.swing.JLabel();
         jLabel51 = new javax.swing.JLabel();
         tfTotal = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -105,6 +102,10 @@ public class PedidoGUI extends javax.swing.JFrame {
         btAPagar = new javax.swing.JRadioButton();
         tfPago = new javax.swing.JTextField();
         usuario = new javax.swing.JLabel();
+        tfDataColeta = new javax.swing.JTextField();
+        jLabel52 = new javax.swing.JLabel();
+        tfDataEntrega = new javax.swing.JTextField();
+        jLabel53 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Pedido");
@@ -233,62 +234,6 @@ public class PedidoGUI extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(420, 420, 100, 20);
 
-        jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel24);
-        jLabel24.setBounds(220, 620, 180, 0);
-        getContentPane().add(jLabel25);
-        jLabel25.setBounds(280, 620, 120, 0);
-
-        jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel26);
-        jLabel26.setBounds(220, 560, 180, 0);
-
-        jLabel27.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel27);
-        jLabel27.setBounds(220, 590, 180, 0);
-
-        jLabel28.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel28);
-        jLabel28.setBounds(220, 530, 180, 0);
-        getContentPane().add(jLabel29);
-        jLabel29.setBounds(280, 530, 120, 0);
-        getContentPane().add(jLabel30);
-        jLabel30.setBounds(280, 560, 120, 0);
-        getContentPane().add(jLabel31);
-        jLabel31.setBounds(280, 590, 120, 0);
-
-        jLabel32.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel32);
-        jLabel32.setBounds(230, 620, 170, 0);
-
-        jLabel33.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel33);
-        jLabel33.setBounds(230, 560, 170, 0);
-
-        jLabel34.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel34);
-        jLabel34.setBounds(230, 590, 170, 0);
-
-        jLabel35.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel35);
-        jLabel35.setBounds(230, 530, 170, 0);
-
-        jLabel40.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel40);
-        jLabel40.setBounds(220, 620, 180, 0);
-
-        jLabel41.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel41);
-        jLabel41.setBounds(220, 560, 180, 0);
-
-        jLabel42.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel42);
-        jLabel42.setBounds(220, 590, 180, 0);
-
-        jLabel43.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        getContentPane().add(jLabel43);
-        jLabel43.setBounds(220, 530, 180, 0);
-
         jLabel51.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel51.setText("Total do Pedido");
         getContentPane().add(jLabel51);
@@ -345,6 +290,26 @@ public class PedidoGUI extends javax.swing.JFrame {
         getContentPane().add(usuario);
         usuario.setBounds(790, 30, 100, 16);
 
+        tfDataColeta.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tfDataColeta.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        getContentPane().add(tfDataColeta);
+        tfDataColeta.setBounds(130, 510, 160, 30);
+
+        jLabel52.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel52.setText("Data do pedido");
+        getContentPane().add(jLabel52);
+        jLabel52.setBounds(20, 520, 110, 16);
+
+        tfDataEntrega.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        tfDataEntrega.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        getContentPane().add(tfDataEntrega);
+        tfDataEntrega.setBounds(130, 550, 160, 30);
+
+        jLabel53.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel53.setText("Data de Entrega");
+        getContentPane().add(jLabel53);
+        jLabel53.setBounds(20, 560, 110, 16);
+
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -394,9 +359,17 @@ public class PedidoGUI extends javax.swing.JFrame {
 
     private void btFinalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btFinalizarActionPerformed
        Pedido p = new Pedido();
-       p.setCodCliente((int) codCli);
+       p.setCodCliente((int)c.getCodCliente());
        p.setValor_produtos(valor);
        p.setQtd_produto(qtd);
+       SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        try {
+            p.setDataEntrega(formato.parse(tfDataEntrega.getText()));
+            p.setDataColeta(formato.parse(tfDataColeta.getText()));
+            
+        } catch (ParseException ex) {
+            Logger.getLogger(PedidoGUI.class.getName()).log(Level.SEVERE, null, ex);
+        }
        if(data!=null){
             p.setData_pagamento(data);
             p.setPagamento(1);
@@ -482,26 +455,12 @@ public class PedidoGUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
-    private javax.swing.JLabel jLabel26;
-    private javax.swing.JLabel jLabel27;
-    private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel30;
-    private javax.swing.JLabel jLabel31;
-    private javax.swing.JLabel jLabel32;
-    private javax.swing.JLabel jLabel33;
-    private javax.swing.JLabel jLabel34;
-    private javax.swing.JLabel jLabel35;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel51;
+    private javax.swing.JLabel jLabel52;
+    private javax.swing.JLabel jLabel53;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JPanel jPanel3;
@@ -510,6 +469,8 @@ public class PedidoGUI extends javax.swing.JFrame {
     private javax.swing.JTable tbPedido;
     private javax.swing.JTable tbProdutos;
     private javax.swing.JTextField tfCodCli;
+    private javax.swing.JTextField tfDataColeta;
+    private javax.swing.JTextField tfDataEntrega;
     private javax.swing.JTextField tfEndereco;
     private javax.swing.JTextField tfNome;
     private javax.swing.JTextField tfPago;

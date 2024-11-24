@@ -32,7 +32,7 @@ public class ClientesGUI extends javax.swing.JFrame {
     
     public ClientesGUI() {
         
-        usuario.setText(Configuracao.getUsuario());
+        //usuario.setText(Configuracao.getUsuario());
         
         initComponents();
 

@@ -38,7 +38,7 @@ public class ManipuladorPedidos {
             pedido.setPagamento(1);
             pedido.setQtd_produto(quantidade);
             pedido.setValor_produtos(valor);
-            pedido.setEntrega(dataEntrega);
+            pedido.setDataEntrega(dataEntrega);
 
             p.inserir(pedido);
         }

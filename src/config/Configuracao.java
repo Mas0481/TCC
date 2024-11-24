@@ -3,7 +3,7 @@ package config;
 public class Configuracao {
 
     private static String usuario;
-    private static int atualizacao = 3000;
+    private static int atualizacao = 300;
     private static int qtd_pedidos_gerados;
     private static int qtd_clientes_gerados;
 

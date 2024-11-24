@@ -317,7 +317,7 @@ public class PedidoAreaSujaGUI extends javax.swing.JFrame {
         p.setPagamento(0);
         java.sql.Date sqlDate = new java.sql.Date(jcDataEntrega.getDate().getTime());
         p.setData_pagamento(null);
-        p.setEntrega((Date) sqlDate);
+        p.setDataEntrega((Date) sqlDate);
 
         //insere o pedido na base
         pedido.inserir(p);

@@ -24,7 +24,7 @@ public class PedidosGUI extends javax.swing.JFrame {
     public PedidosGUI() {
         
         //seta o usuario atual
-        usuario.setText(Configuracao.getUsuario());
+       // usuario.setText(Configuracao.getUsuario());
         
         initComponents();
         
@@ -218,7 +218,7 @@ public class PedidosGUI extends javax.swing.JFrame {
                     p.setCodPedido( cad.get(rowIndex).getCodPedido());
                     p.setQtd_produto(cad.get(rowIndex).getQtd_produto());
                     p.setValor_produtos(cad.get(rowIndex).getValor_produtos());
-                    p.setEntrega(cad.get(rowIndex).getEntrega());
+                    p.setDataEntrega(cad.get(rowIndex).getDataEntrega());
                     p.setPagamento(cad.get(rowIndex).getPagamento());
                     p.setData_pagamento(cad.get(rowIndex).getData_pagamento());               
                 }   
